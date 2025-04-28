@@ -95,6 +95,21 @@ operator.forEach(operate => operate.addEventListener("click", function (e) {
 /* display on screen when a user press a digit */
 digits.forEach(btn => btn.addEventListener("click", displayOnScreen));
 
+/* function to display on screen */
+function displayOnScreen() {
+    //console.log(num1);
+    if (display.value === "TAMBALOSLOS") {
+        clearSc();
+    }
+    if (this.textContent == '0' && num1 == "" && num2 == "") {
+        num1 = "";
+    } else {
+        num1 += this.textContent;
+        display.value = num1;
+    }
+
+}
+
 /* code for clearing screens */
 clearScreen.addEventListener("click", clearSc);
 function clearSc() {
@@ -103,17 +118,4 @@ function clearSc() {
     num1 = '';
     num2 = '';
     oper = undefined;
-}
-
-/* function to display on screen */
-function displayOnScreen() {
-    //console.log(num1);
-    if (this.textContent == '0' && num1 == "" && num2 == "") {
-        num1 = "";
-    } else if (display.value === "TAMBALOSLOS") {
-        clearSc();
-    } else {
-        num1 += this.textContent;
-        display.value = num1;
-    }
 }
