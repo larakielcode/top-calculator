@@ -28,10 +28,6 @@ const compute = document.querySelector("#equals");
 /* code for compute */
 compute.addEventListener("click", computeItNow);
 function computeItNow() {
-    console.log(sub(9, 6));
-    console.log(num1);
-    console.log(num2);
-    console.log(oper);
     if (oper === "+") {
         add(Number(num2), Number(num1));
         checkNumberFormat(result);
@@ -45,16 +41,21 @@ function computeItNow() {
         checkNumberFormat(result);
     }
     if (oper === "/") {
-        if (num1 === 0) {
-            display.value = "LMAO";
+        if (num1 === "0") {
+            result = "TAMBALOSLOS"
+            display.value = result;
+            result = "";
         } else {
             divide(Number(num2), Number(num1));
             checkNumberFormat(result);
         }
     }
     summaryDisplay.value = `${num2} ${oper} ${num1}`;
-    num1 = display.value;
+    num1 = result;
     oper = undefined;
+    console.log(num1);
+    console.log(num2);
+    console.log(result);
 }
 
 /* add a script for formatting display */
@@ -81,11 +82,13 @@ negate.addEventListener("click", (e) => {
 
 /* when a user clicks an operator in the calculator */
 operator.forEach(operate => operate.addEventListener("click", function (e) {
-    if (oper === undefined) {
+    if (oper === undefined && display.value !== "TAMBALOSLOS") {
         num2 = num1;
         num1 = '';
         oper = this.textContent;
         summaryDisplay.value = `${num2} ${oper}`;
+    } else {
+        clearSc();
     }
 }));
 
@@ -93,21 +96,24 @@ operator.forEach(operate => operate.addEventListener("click", function (e) {
 digits.forEach(btn => btn.addEventListener("click", displayOnScreen));
 
 /* code for clearing screens */
-clearScreen.addEventListener("click", () => {
+clearScreen.addEventListener("click", clearSc);
+function clearSc() {
     display.value = 0;
     summaryDisplay.value = '';
     num1 = '';
     num2 = '';
     oper = undefined;
-});
+}
 
 /* function to display on screen */
 function displayOnScreen() {
-    if (this.textContent == '0' && num1 == "") {
-        num1 = 0;
+    //console.log(num1);
+    if (this.textContent == '0' && num1 == "" && num2 == "") {
+        num1 = "";
+    } else if (display.value === "TAMBALOSLOS") {
+        clearSc();
     } else {
         num1 += this.textContent;
         display.value = num1;
     }
-
 }
