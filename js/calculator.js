@@ -17,6 +17,7 @@ let negateCounter = 1;
 
 
 const display = document.querySelector("#screen");
+const summaryDisplay = document.querySelector("#displaySum");
 const digits = document.querySelectorAll(".digits");
 const clearScreen = document.querySelector("#clear");
 const operator = document.querySelectorAll(".operand");
@@ -36,6 +37,8 @@ negate.addEventListener("click", (e) => {
 
 operator.forEach(operate => operate.addEventListener("click", function (e) {
     console.log(oper);
+    num2 = num1;
+    summaryDisplay.value = num2;
     if (oper === undefined) {
         num2 = num1;
         num1 = '';
@@ -48,8 +51,10 @@ operator.forEach(operate => operate.addEventListener("click", function (e) {
 }))
 
 digits.forEach(btn => btn.addEventListener("click", displayOnScreen));
+
 clearScreen.addEventListener("click", () => {
     display.value = 0;
+    summaryDisplay.value = '';
     num1 = '';
     num2 = '';
 });
