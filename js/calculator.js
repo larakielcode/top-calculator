@@ -6,35 +6,36 @@ Date: April 28, 2025
 Code starts below
 */
 
-let num1 = "";
-let num2 = 0;
-let operator = "";
+const add = (a, b) => a + b;
+const sub = (a, b) => a - b;
+const multiply = (a, b) => a * b;
+const divide = (a, b) => a / b;
 
-function operate(a, b, oper) {
-    return a + oper + b;
-}
+const display = document.querySelector("#screen");
+const digits = document.querySelectorAll(".digits");
+const clearScreen = document.querySelector("#clear");
+const operator = document.querySelectorAll(".operand");
 
-function refreshScreen(args) {
-    if (args === '') {
-        document.getElementById("screen").value = '';
-    }
+let num1 = '';
+let num2;
+let oper;
 
-    document.getElementById("screen").value = num1;
-    console.log(num1);
-    console.log(num1.length);
-}
+
+digits.forEach(btn => btn.addEventListener("click", displayOnScreen));
+clearScreen.addEventListener("click", () => {
+    display.value = 0;
+    num1 = '';
+    num2 = '';
+});
 
 function displayOnScreen() {
-    if (this.textContent === "C") {
-        num1 = "";
-        refreshScreen('');
+    if (this.textContent == '0' && num1 == "") {
+        num1 = '';
     } else {
         num1 += this.textContent;
-        refreshScreen(num1);
+        display.value = num1;
     }
 
 }
 
-const buttonContainer = document.querySelector(".buttons");
-const buttons = buttonContainer.querySelectorAll("button");
-buttons.forEach(btn => btn.addEventListener("click", displayOnScreen));
+console.log(num1);
