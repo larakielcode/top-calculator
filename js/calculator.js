@@ -41,6 +41,29 @@ const digits = document.querySelectorAll(".digits");
 const operator = document.querySelectorAll(".operand");
 const compute = document.querySelector("#equals");
 const negate = document.querySelector(".negate");
+const percent = document.querySelector(".percent");
+
+/* Percent Function */
+percent.addEventListener("click", getPercent);
+function getPercent() {
+    if (oper == 'x') {
+        num1 = num1 / 100;
+        expression = `${num2} ${oper} ${num1}`;
+        result = formatNum(num2 * num1);
+    } else {
+        clearSc();
+    }
+    displayInitialize();
+    console.clear();
+    console.log('%cvalues after clicking percent button', 'color:red');
+    console.log('var num1 ===> ', num1);
+    console.log('var num2 ===> ', num2);
+    console.log('var result ===> ', result);
+    console.log('var expression ===> ', expression);
+    console.log('var oper ===> ', oper);
+    console.log('summary display value ===> ', summaryDisplay.value); // string 0
+    console.log('main display value ===> ', mainDisplay.value); // string 0
+}
 
 /* function negate */
 negate.addEventListener("click", () => {
