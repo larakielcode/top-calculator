@@ -10,12 +10,12 @@ let num1;
 let num2;
 let oper; // string to store operator
 let result; // string to store the math expression
-let negateCounter = 1;
+let counter = 0;
 let expression;
 
 const add = (a, b) => result = formatNum(Number(a) + Number(b));
-const sub = (a, b) => result = formatNum((a / b));
-const multiply = (a, b) => result = formatNum((a / b));
+const sub = (a, b) => result = formatNum((a - b));
+const multiply = (a, b) => result = formatNum((a * b));
 const divide = (a, b) => {
     if (a == '0' || b == '0') {
         clearSc();
@@ -42,6 +42,7 @@ const operator = document.querySelectorAll(".operand");
 const compute = document.querySelector("#equals");
 const negate = document.querySelector(".negate");
 const percent = document.querySelector(".percent");
+const period = document.querySelector("#dotButton");
 
 /* Percent Function */
 percent.addEventListener("click", getPercent);
@@ -99,6 +100,7 @@ window.addEventListener("load", (event) => {
     console.log('summary display value ===> ', summaryDisplay.value); // string 0
     console.log('main display value ===> ', mainDisplay.value); // string 0
     // initialize display
+    period.disabled = false;
     num1 = "";
     num2 = "";
     result = "0";
@@ -121,10 +123,16 @@ digits.forEach(btn => btn.addEventListener("click", checkDigit));
 
 /* function to display on screen */
 function checkDigit() {
-    //set display
+
     let num = this.textContent;
+
+    if (counter > 0) {
+        clearSc();
+    }
+
     showDigit(num);
     displayInitialize();
+
     console.clear();
     console.log('%cvalues after display pressing a digit', 'color:red');
     console.log('var num1 ===> ', num1);
@@ -138,19 +146,33 @@ function checkDigit() {
 
 /* function to show the digits with error handling */
 function showDigit(num) {
+
     num1 += num;
     /* isNotAllZero function checks for the existing num1 if its not all zero */
     if ((!isNotAllZero(num1)) && num == '0') {
         num1 = '0'; // if num1 is all 0 reset the value of num1 to empty
     }
 
+    if (num == '.') {
+        checkMoreDot();
+    }
+
     num1 = removeTrailingZero(num1);
+    //num1 = checkMoreDot(num1);
     return (num1 == "") ? num1 = "0" : result = num1;
 }
+
 /* Check for a number input that it is not all zero */
 let isNotAllZero = (num) => {
-    return num * 1 != 0;
+    return num * 1 !== 0;
 };
+
+/* function to disable the dot button */
+function checkMoreDot() {
+    if (num1.includes('.')) {
+        period.disabled = true;
+    }
+}
 
 /* function to remove trailing 0 */
 function removeTrailingZero(arg) {
@@ -166,6 +188,7 @@ function clearSc() {
     oper = "";
     expression = "";
     result = "0";
+    counter = 0;
 
     displayInitialize();
     console.clear();
@@ -189,6 +212,7 @@ function storeOperand() {
         expression = `${num1} ${oper}`;
         num1 = "";
     } else {
+        counter = 0;
         oper = this.textContent;
         num2 = result;
         expression = `${num2} ${oper}`;
@@ -198,7 +222,7 @@ function storeOperand() {
     if (result == "LOSLOS NIMO") {
         clearSc();
     }
-
+    period.disabled = false;
     displayInitialize();
     console.clear();
     console.log('%cvalues after pressing the operator', 'color:red');
@@ -218,20 +242,21 @@ function getComputation() {
     if ((num1 != "" || num2 != "") && oper != "") {
         expression = result;
         getAnswer();
+        counter++;
     } else {
         clearSc();
     }
     displayInitialize();
+    period.disabled = false;
     console.clear();
     console.log('%cvalues after pressing the equals', 'color:red');
     console.log('var num1 ===> ', num1);
     console.log('var num2 ===> ', num2);
     console.log('var result ===> ', result);
-    let sample = 333.22 % 1;
-    console.log('sample ===> ', sample);
     console.log('type of result===> ', typeof result);
     console.log('var expression ===> ', expression);
     console.log('var oper ===> ', oper);
+    console.log('var counter ===> ', counter);
     console.log('summary display value ===> ', summaryDisplay.value);
     console.log('main display value ===> ', mainDisplay.value);
 }
