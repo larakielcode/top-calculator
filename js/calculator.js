@@ -55,15 +55,6 @@ function getPercent() {
         clearSc();
     }
     displayInitialize();
-    console.clear();
-    console.log('%cvalues after clicking percent button', 'color:red');
-    console.log('var num1 ===> ', num1);
-    console.log('var num2 ===> ', num2);
-    console.log('var result ===> ', result);
-    console.log('var expression ===> ', expression);
-    console.log('var oper ===> ', oper);
-    console.log('summary display value ===> ', summaryDisplay.value); // string 0
-    console.log('main display value ===> ', mainDisplay.value); // string 0
 }
 
 /* function negate */
@@ -76,29 +67,10 @@ negate.addEventListener("click", () => {
     }
 
     displayInitialize();
-    console.clear();
-    console.log('%cvalues after clicking negate button', 'color:red');
-    console.log('var num1 ===> ', num1);
-    console.log('var num2 ===> ', num2);
-    console.log('var result ===> ', result);
-    console.log('var expression ===> ', expression);
-    console.log('var oper ===> ', oper);
-    console.log('summary display value ===> ', summaryDisplay.value); // string 0
-    console.log('main display value ===> ', mainDisplay.value); // string 0
 });
 
 /* initialize variables and display on load */
 window.addEventListener("load", (event) => {
-    //dump all values
-    console.clear();
-    console.log('%cfresh values after window load event', 'color:pink');
-    console.log('var num1 ===> ', num1);
-    console.log('var num2 ===> ', num2);
-    console.log('var result ===> ', result);
-    console.log('var expression ===> ', expression);
-    console.log('var oper ===> ', oper);
-    console.log('summary display value ===> ', summaryDisplay.value); // string 0
-    console.log('main display value ===> ', mainDisplay.value); // string 0
     // initialize display
     period.disabled = false;
     num1 = "";
@@ -107,15 +79,6 @@ window.addEventListener("load", (event) => {
     expression = "";
     oper = "";
     displayInitialize();
-    console.clear();
-    console.log('%cvalues after display initialize', 'color:red');
-    console.log('var num1 ===> ', num1);
-    console.log('var num2 ===> ', num2);
-    console.log('var result ===> ', result);
-    console.log('var expression ===> ', expression);
-    console.log('var oper ===> ', oper);
-    console.log('summary display value ===> ', summaryDisplay.value); // string 0
-    console.log('main display value ===> ', mainDisplay.value); // string 0
 });
 
 /* when pressing a digit */
@@ -133,15 +96,6 @@ function checkDigit() {
     showDigit(num);
     displayInitialize();
 
-    console.clear();
-    console.log('%cvalues after display pressing a digit', 'color:red');
-    console.log('var num1 ===> ', num1);
-    console.log('var num2 ===> ', num2);
-    console.log('var result ===> ', result);
-    console.log('var expression ===> ', expression);
-    console.log('var oper ===> ', oper);
-    console.log('summary display value ===> ', summaryDisplay.value); // string 0
-    console.log('main display value ===> ', mainDisplay.value);
 }
 
 /* function to show the digits with error handling */
@@ -191,15 +145,6 @@ function clearSc() {
     counter = 0;
 
     displayInitialize();
-    console.clear();
-    console.log('%cvalues after clear screen', 'color:red');
-    console.log('var num1 ===> ', num1);
-    console.log('var num2 ===> ', num2);
-    console.log('var result ===> ', result);
-    console.log('var expression ===> ', expression);
-    console.log('var oper ===> ', oper);
-    console.log('summary display value ===> ', summaryDisplay.value);
-    console.log('main display value ===> ', mainDisplay.value);
 }
 
 /* function for pressing an operand */
@@ -224,15 +169,6 @@ function storeOperand() {
     }
     period.disabled = false;
     displayInitialize();
-    console.clear();
-    console.log('%cvalues after pressing the operator', 'color:red');
-    console.log('var num1 ===> ', num1);
-    console.log('var num2 ===> ', num2);
-    console.log('var result ===> ', result);
-    console.log('var expression ===> ', expression);
-    console.log('var oper ===> ', oper);
-    console.log('summary display value ===> ', summaryDisplay.value);
-    console.log('main display value ===> ', mainDisplay.value);
 }
 
 /* Code when user click equals */
@@ -248,17 +184,6 @@ function getComputation() {
     }
     displayInitialize();
     period.disabled = false;
-    console.clear();
-    console.log('%cvalues after pressing the equals', 'color:red');
-    console.log('var num1 ===> ', num1);
-    console.log('var num2 ===> ', num2);
-    console.log('var result ===> ', result);
-    console.log('type of result===> ', typeof result);
-    console.log('var expression ===> ', expression);
-    console.log('var oper ===> ', oper);
-    console.log('var counter ===> ', counter);
-    console.log('summary display value ===> ', summaryDisplay.value);
-    console.log('main display value ===> ', mainDisplay.value);
 }
 
 /* function for display */
