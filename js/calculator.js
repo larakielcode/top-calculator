@@ -6,116 +6,87 @@ Date: April 28, 2025
 Code starts below
 */
 
-let num1 = '';
+let num1;
 let num2;
-let oper;
+let oper; // string to store operator
 let negateCounter = 1;
-let result = 0;
+let result; // string to store the math expression
 
 const add = (a, b) => result = a + b;
 const sub = (a, b) => result = a - b;
 const multiply = (a, b) => result = a * b;
 const divide = (a, b) => result = a / b;
 
-const display = document.querySelector("#screen");
+const mainDisplay = document.querySelector("#screen");
 const summaryDisplay = document.querySelector("#displaySum");
+
+/* initialize variables and display on load */
+window.addEventListener("load", (event) => {
+    //dump all values
+    console.log('fresh values after window load event');
+    console.log('var num1 ===> ', num1);
+    console.log('var num2 ===> ', num2);
+    console.log('var result ===> ', result);
+    console.log('var oper ===> ', oper);
+    console.log('summary display value ===> ', summaryDisplay.value); // string 0
+    console.log('main display value ===> ', mainDisplay.value); // string 0
+    // initialize display
+    num1 = 0;
+    num2 = 0;
+    result = 0;
+    oper = "";
+    summaryDisplay.value = "";
+    mainDisplay.value = num1;
+    console.log('values after display initialize');
+    console.log('var num1 ===> ', num1);
+    console.log('var num2 ===> ', num2);
+    console.log('var result ===> ', result);
+    console.log('var oper ===> ', oper);
+    console.log('main display value ===> ', mainDisplay.value); // string 0
+});
+
 const digits = document.querySelectorAll(".digits");
 const clearScreen = document.querySelector("#clear");
 const operator = document.querySelectorAll(".operand");
 const negate = document.querySelector(".negate");
 const compute = document.querySelector("#equals");
 
-/* code for compute */
-compute.addEventListener("click", computeItNow);
-function computeItNow() {
-    if (oper === "+") {
-        add(Number(num2), Number(num1));
-        checkNumberFormat(result);
-    }
-    if (oper === "-") {
-        sub(Number(num2), Number(num1));
-        checkNumberFormat(result);
-    }
-    if (oper === "x") {
-        multiply(Number(num2), Number(num1));
-        checkNumberFormat(result);
-    }
-    if (oper === "/") {
-        if (num1 === "0") {
-            result = "TAMBALOSLOS"
-            display.value = result;
-            result = "";
-        } else {
-            divide(Number(num2), Number(num1));
-            checkNumberFormat(result);
-        }
-    }
-    summaryDisplay.value = `${num2} ${oper} ${num1}`;
-    num1 = result;
-    oper = undefined;
-    console.log(num1);
-    console.log(num2);
-    console.log(result);
-}
 
-/* add a script for formatting display */
-function checkNumberFormat(res) {
-    if (res % 1 != 0) {
-        display.value = result.toFixed(3);
-    } else {
-        display.value = result;
-    }
-}
-
-/* negate functionality */
-negate.addEventListener("click", (e) => {
-    if (negateCounter % 2 == 0) {
-        num1 = num1 * -1;
-        display.value = num1;
-        negateCounter++;
-    } else {
-        num1 = `-${num1}`;
-        display.value = num1;
-        negateCounter++;
-    }
-})
-
-/* when a user clicks an operator in the calculator */
-operator.forEach(operate => operate.addEventListener("click", function (e) {
-    if (oper === undefined && display.value !== "TAMBALOSLOS") {
-        num2 = num1;
-        num1 = '';
-        oper = this.textContent;
-        summaryDisplay.value = `${num2} ${oper}`;
-    } else {
-        clearSc();
-    }
-}));
 
 /* display on screen when a user press a digit */
 digits.forEach(btn => btn.addEventListener("click", displayOnScreen));
 
 /* function to display on screen */
 function displayOnScreen() {
-    //console.log(num1);
-    if (display.value === "TAMBALOSLOS") {
-        clearSc();
+    let outText = this.textContent;
+    if (outText === "0" && mainDisplay.value === "0") {
+        outText = "";
+        console.log("this is true");
+        console.log("displaying outtext when main display ", outText);
+        return;
     }
-    if (this.textContent == '0' && num1 == "" && num2 == "") {
-        num1 = "";
-    } else {
-        num1 += this.textContent;
-        display.value = num1;
-    }
-
+    mainDisplay.value += outText;
+    console.log("displaying main Display after 0", mainDisplay.value);
 }
 
-/* code for clearing screens */
-clearScreen.addEventListener("click", clearSc);
-function clearSc() {
-    display.value = 0;
-    summaryDisplay.value = '';
-    num1 = '';
-    num2 = '';
-    oper = undefined;
-}
+/* clear all data */
+clearScreen.addEventListener("click", function (e) {
+    //clear the variables
+    num1 = 0;
+    num2 = 0;
+    oper = "";
+    result = "";
+
+    //clear the screens
+    mainDisplay.value = "";
+    summaryDisplay.value = "";
+
+    console.log('values after clear the screen');
+    console.log('var num1 ===> ', num1);
+    console.log('var num2 ===> ', num2);
+    console.log('var result ===> ', result);
+    console.log('var oper ===> ', oper);
+    console.log('summary display value ===> ', summaryDisplay.value);
+    console.log('main display value ===> ', mainDisplay.value);
+})
+
