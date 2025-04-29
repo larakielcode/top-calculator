@@ -3,6 +3,8 @@
 This simple project in JS is in regards to The Odin Project learning. 
 I also would like to thank [@GeoDaoyu](https://github.com/GeoDaoyu) for contributing on my issues I encounter on this project. Thank you!
 
+[See Demo](https://larakielcode.github.io/top-calculator/)
+
 > [!CAUTION]
 > * ~~I added a lot of console log in this project for debugging purposes :D Sorry in advance. Thank you!~~
 > * Console.log that serves for debugging has been removed.
