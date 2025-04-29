@@ -1,7 +1,7 @@
 # Welcome to my Simple Calculator Project
 
 This simple project in JS is in regards to The Odin Project learning. 
-I also would like to thank @GeoDaoyu for contributing on my issues I encounter on this project. Thank you!
+I also would like to thank [@GeoDaoyu](https://github.com/GeoDaoyu) for contributing on my issues I encounter on this project. Thank you!
 
 
 > [!CAUTION]
