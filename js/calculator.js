@@ -70,7 +70,7 @@ function checkDigit() {
     displayInitialize();
     //num1 = parseInt(num1); parse num1 to be a number after displaying in screen
     console.clear();
-    console.log('%cvalues after display pressing a digit', 'color:yellow');
+    console.log('%cvalues after display pressing a digit', 'color:red');
     console.log('var num1 ===> ', num1);
     console.log('var num2 ===> ', num2);
     console.log('var result ===> ', result);
@@ -83,17 +83,13 @@ function checkDigit() {
 /* function to show the digits with error handling */
 function showDigit(num) {
     num1 += num;
-
     /* isNotAllZero function checks for the existing num1 if its not all zero */
     if (!isNotAllZero(num1)) {
         num1 = ""; // if num1 is all 0 reset the value of num1 to empty
-    } else {
-        console.log('%cvalue of num1 if user press a digit', 'color:lightblue', num1);
     }
-
     /* checks for the value of num1 if its empty display it 0 or display the value of num1 */
     //return (num1 == "") ? mainDisplay.value = 0 : mainDisplay.value = num1;
-    return (num1 == "") ? num1 = "" : num1;
+    return (num1 == "") ? num1 = "" : result = num1;
 }
 /* Check for a number input that it is not all zero */
 let isNotAllZero = (num) => {
@@ -116,7 +112,7 @@ function clearSc() {
     displayInitialize();
 
     console.clear();
-    console.log('values after clear the screen');
+    console.log('%cvalues after clear screen', 'color:red');
     console.log('var num1 ===> ', num1);
     console.log('var num2 ===> ', num2);
     console.log('var result ===> ', result);
@@ -134,17 +130,16 @@ function storeOperand() {
         oper = this.textContent;
         num2 = num1;
         expression = `${num1} ${oper}`;
-        result = expression;
         num1 = "";
     } else {
         oper = this.textContent;
-        num1 = num2;
-        result = `${num1} ${oper}`;
+        num2 = result;
+        expression = `${num2} ${oper}`;
         num1 = "";
     }
-
+    displayInitialize();
     console.clear();
-    console.log('%cvalues after pressing the operator', 'color:yellow');
+    console.log('%cvalues after pressing the operator', 'color:red');
     console.log('var num1 ===> ', num1);
     console.log('var num2 ===> ', num2);
     console.log('var result ===> ', result);
@@ -152,7 +147,6 @@ function storeOperand() {
     console.log('var oper ===> ', oper);
     console.log('summary display value ===> ', summaryDisplay.value);
     console.log('main display value ===> ', mainDisplay.value);
-    displayInitialize();
 }
 
 /* Code when user click equals */
@@ -160,13 +154,14 @@ compute.addEventListener("click", getComputation);
 function getComputation() {
     result = `${num2} ${oper} ${num1}`;
     if (num1 != "" && num2 != "" && oper != "") {
+        expression = result;
         getAnswer();
     } else {
         clearSc();
     }
     displayInitialize();
     console.clear();
-    console.log('%cvalues after pressing the equals', 'color:yellow');
+    console.log('%cvalues after pressing the equals', 'color:red');
     console.log('var num1 ===> ', num1);
     console.log('var num2 ===> ', num2);
     console.log('var result ===> ', result);
@@ -179,11 +174,11 @@ function getComputation() {
 /* function for display */
 function displayInitialize() {
     if (num1 == "") {
-        summaryDisplay.value = result;
+        summaryDisplay.value = expression;
         mainDisplay.value = 0;
     } else {
-        summaryDisplay.value = result;
-        mainDisplay.value = num1;
+        summaryDisplay.value = expression;
+        mainDisplay.value = result;
     }
 }
 
@@ -191,23 +186,15 @@ function getAnswer() {
     switch (oper) {
         case '+':
             add(num2, num1);
-            num1 = result;
-            num2 = num1;
             break;
         case '-':
             sub(num2, num1);
-            num1 = result;
-            num2 = num1;
             break;
         case 'x':
             multiply(num2, num1);
-            num1 = result;
-            num2 = num1;
             break;
         case '/':
             divide(num2, num1);
-            num1 = result;
-            num2 = num1;
             break;
         default:
             break;
