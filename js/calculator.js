@@ -19,11 +19,12 @@ const divide = (a, b) => result = a / b;
 
 const mainDisplay = document.querySelector("#screen");
 const summaryDisplay = document.querySelector("#displaySum");
+const digits = document.querySelectorAll(".digits");
 
 /* initialize variables and display on load */
 window.addEventListener("load", (event) => {
     //dump all values
-    console.log('fresh values after window load event');
+    console.log('%cfresh values after window load event', 'color:pink');
     console.log('var num1 ===> ', num1);
     console.log('var num2 ===> ', num2);
     console.log('var result ===> ', result);
@@ -37,36 +38,32 @@ window.addEventListener("load", (event) => {
     oper = "";
     summaryDisplay.value = "";
     mainDisplay.value = num1;
-    console.log('values after display initialize');
+    console.log('%cvalues after display initialize', 'color:red');
     console.log('var num1 ===> ', num1);
     console.log('var num2 ===> ', num2);
     console.log('var result ===> ', result);
     console.log('var oper ===> ', oper);
+    console.log('summary display value ===> ', summaryDisplay.value); // string 0
     console.log('main display value ===> ', mainDisplay.value); // string 0
 });
 
-const digits = document.querySelectorAll(".digits");
 const clearScreen = document.querySelector("#clear");
 const operator = document.querySelectorAll(".operand");
 const negate = document.querySelector(".negate");
 const compute = document.querySelector("#equals");
 
-
-
-/* display on screen when a user press a digit */
+/* when pressing a digit */
 digits.forEach(btn => btn.addEventListener("click", displayOnScreen));
 
 /* function to display on screen */
 function displayOnScreen() {
-    let outText = this.textContent;
-    if (outText === "0" && mainDisplay.value === "0") {
-        outText = "";
-        console.log("this is true");
-        console.log("displaying outtext when main display ", outText);
-        return;
-    }
-    mainDisplay.value += outText;
-    console.log("displaying main Display after 0", mainDisplay.value);
+    console.log('%cvalues after display pressing a digit', 'color:yellow');
+    console.log('var num1 ===> ', num1);
+    console.log('var num2 ===> ', num2);
+    console.log('var result ===> ', result);
+    console.log('var oper ===> ', oper);
+    console.log('summary display value ===> ', summaryDisplay.value); // string 0
+    console.log('main display value ===> ', mainDisplay.value);
 }
 
 /* clear all data */
