@@ -16,7 +16,14 @@ let expression;
 const add = (a, b) => result = parseInt(a) + parseInt(b);
 const sub = (a, b) => result = a - b;
 const multiply = (a, b) => result = a * b;
-const divide = (a, b) => result = a / b;
+const divide = (a, b) => {
+    if (a == '0' || b == '0') {
+        clearSc();
+        return result = "LMAO";
+    } else {
+        return result = a / b;
+    }
+};
 
 const mainDisplay = document.querySelector("#screen");
 const summaryDisplay = document.querySelector("#displaySum");
@@ -40,7 +47,7 @@ window.addEventListener("load", (event) => {
     // initialize display
     num1 = "";
     num2 = "";
-    result = "";
+    result = "0";
     expression = "";
     oper = "";
     displayInitialize();
@@ -84,17 +91,22 @@ function checkDigit() {
 function showDigit(num) {
     num1 += num;
     /* isNotAllZero function checks for the existing num1 if its not all zero */
-    if (!isNotAllZero(num1)) {
-        num1 = ""; // if num1 is all 0 reset the value of num1 to empty
+    if ((!isNotAllZero(num1)) && num == '0') {
+        num1 = '0'; // if num1 is all 0 reset the value of num1 to empty
     }
     /* checks for the value of num1 if its empty display it 0 or display the value of num1 */
     //return (num1 == "") ? mainDisplay.value = 0 : mainDisplay.value = num1;
-    return (num1 == "") ? num1 = "" : result = num1;
+    num1 = removeTrailingZero(num1);
+    return (num1 == "") ? num1 = "0" : result = num1;
 }
 /* Check for a number input that it is not all zero */
 let isNotAllZero = (num) => {
     return num * 1 != 0;
 };
+
+function removeTrailingZero(arg) {
+    return arg.replace(/^0+/, '');
+}
 
 /* clear all data */
 clearScreen.addEventListener("click", clearSc);
@@ -104,7 +116,7 @@ function clearSc() {
     num2 = "";
     oper = "";
     expression = "";
-    result = "";
+    result = "0";
 
     //clear the screens
     /* mainDisplay.value = 0;
@@ -137,6 +149,11 @@ function storeOperand() {
         expression = `${num2} ${oper}`;
         num1 = "";
     }
+
+    if (result == "LMAO") {
+        clearSc();
+    }
+
     displayInitialize();
     console.clear();
     console.log('%cvalues after pressing the operator', 'color:red');
@@ -173,9 +190,9 @@ function getComputation() {
 
 /* function for display */
 function displayInitialize() {
-    if (num1 == "") {
+    if (num1 == 0) {
         summaryDisplay.value = expression;
-        mainDisplay.value = 0;
+        mainDisplay.value = result;
     } else {
         summaryDisplay.value = expression;
         mainDisplay.value = result;
