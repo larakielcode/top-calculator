@@ -97,14 +97,13 @@ digits.forEach(btn => btn.addEventListener("click", displayOnScreen));
 
 /* function to display on screen */
 function displayOnScreen() {
-    //console.log(num1);
     if (display.value === "TAMBALOSLOS") {
         clearSc();
     }
     if (this.textContent == '0' && num1 == "" && num2 == "") {
         num1 = "";
     } else {
-        num1 += this.textContent;
+        num1 = num1 === '0' ? this.textContent : num1 + this.textContent;
         display.value = num1;
     }
 
