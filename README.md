@@ -12,4 +12,4 @@ I also would like to thank [@GeoDaoyu](https://github.com/GeoDaoyu) for contribu
 > * ~~This is almost a working simple calculator aside from the percentage button~~
 > * This is now a working simple calculator.
 
-IF you encounter any issues or bug in the project please dont hesistate to open an issue. Thank you!
+## If you encounter any issues or bug in the project please dont hesistate to open an issue. Thank you!
