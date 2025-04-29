@@ -11,8 +11,9 @@ let num2;
 let oper; // string to store operator
 let result; // string to store the math expression
 let negateCounter = 1;
+let expression;
 
-const add = (a, b) => result = a + b;
+const add = (a, b) => result = parseInt(a) + parseInt(b);
 const sub = (a, b) => result = a - b;
 const multiply = (a, b) => result = a * b;
 const divide = (a, b) => result = a / b;
@@ -22,6 +23,7 @@ const summaryDisplay = document.querySelector("#displaySum");
 const clearScreen = document.querySelector("#clear");
 const digits = document.querySelectorAll(".digits");
 const operator = document.querySelectorAll(".operand");
+const compute = document.querySelector("#equals");
 
 /* initialize variables and display on load */
 window.addEventListener("load", (event) => {
@@ -31,6 +33,7 @@ window.addEventListener("load", (event) => {
     console.log('var num1 ===> ', num1);
     console.log('var num2 ===> ', num2);
     console.log('var result ===> ', result);
+    console.log('var expression ===> ', expression);
     console.log('var oper ===> ', oper);
     console.log('summary display value ===> ', summaryDisplay.value); // string 0
     console.log('main display value ===> ', mainDisplay.value); // string 0
@@ -38,6 +41,7 @@ window.addEventListener("load", (event) => {
     num1 = "";
     num2 = "";
     result = "";
+    expression = "";
     oper = "";
     displayInitialize();
     /* summaryDisplay.value = "";
@@ -47,13 +51,13 @@ window.addEventListener("load", (event) => {
     console.log('var num1 ===> ', num1);
     console.log('var num2 ===> ', num2);
     console.log('var result ===> ', result);
+    console.log('var expression ===> ', expression);
     console.log('var oper ===> ', oper);
     console.log('summary display value ===> ', summaryDisplay.value); // string 0
     console.log('main display value ===> ', mainDisplay.value); // string 0
 });
 
 const negate = document.querySelector(".negate");
-const compute = document.querySelector("#equals");
 
 /* when pressing a digit */
 digits.forEach(btn => btn.addEventListener("click", checkDigit));
@@ -70,6 +74,7 @@ function checkDigit() {
     console.log('var num1 ===> ', num1);
     console.log('var num2 ===> ', num2);
     console.log('var result ===> ', result);
+    console.log('var expression ===> ', expression);
     console.log('var oper ===> ', oper);
     console.log('summary display value ===> ', summaryDisplay.value); // string 0
     console.log('main display value ===> ', mainDisplay.value);
@@ -96,11 +101,13 @@ let isNotAllZero = (num) => {
 };
 
 /* clear all data */
-clearScreen.addEventListener("click", function (e) {
+clearScreen.addEventListener("click", clearSc);
+function clearSc() {
     //clear the variables
     num1 = "";
     num2 = "";
     oper = "";
+    expression = "";
     result = "";
 
     //clear the screens
@@ -113,30 +120,61 @@ clearScreen.addEventListener("click", function (e) {
     console.log('var num1 ===> ', num1);
     console.log('var num2 ===> ', num2);
     console.log('var result ===> ', result);
+    console.log('var expression ===> ', expression);
     console.log('var oper ===> ', oper);
     console.log('summary display value ===> ', summaryDisplay.value);
     console.log('main display value ===> ', mainDisplay.value);
-})
+}
 
 /* function for pressing an operand */
 operator.forEach(operand => operand.addEventListener("click", storeOperand));
 function storeOperand() {
-    oper = this.textContent;
-    num2 = num1;
-    result = `${num1} ${oper}`;
-    num1 = "";
+    // check if the user press continuously on the operand
+    if (oper === "") {
+        oper = this.textContent;
+        num2 = num1;
+        expression = `${num1} ${oper}`;
+        result = expression;
+        num1 = "";
+    } else {
+        oper = this.textContent;
+        num1 = num2;
+        result = `${num1} ${oper}`;
+        num1 = "";
+    }
+
     console.clear();
     console.log('%cvalues after pressing the operator', 'color:yellow');
     console.log('var num1 ===> ', num1);
     console.log('var num2 ===> ', num2);
     console.log('var result ===> ', result);
+    console.log('var expression ===> ', expression);
     console.log('var oper ===> ', oper);
     console.log('summary display value ===> ', summaryDisplay.value);
     console.log('main display value ===> ', mainDisplay.value);
     displayInitialize();
 }
 
-
+/* Code when user click equals */
+compute.addEventListener("click", getComputation);
+function getComputation() {
+    result = `${num2} ${oper} ${num1}`;
+    if (num1 != "" && num2 != "" && oper != "") {
+        getAnswer();
+    } else {
+        clearSc();
+    }
+    displayInitialize();
+    console.clear();
+    console.log('%cvalues after pressing the equals', 'color:yellow');
+    console.log('var num1 ===> ', num1);
+    console.log('var num2 ===> ', num2);
+    console.log('var result ===> ', result);
+    console.log('var expression ===> ', expression);
+    console.log('var oper ===> ', oper);
+    console.log('summary display value ===> ', summaryDisplay.value);
+    console.log('main display value ===> ', mainDisplay.value);
+}
 
 /* function for display */
 function displayInitialize() {
@@ -149,3 +187,29 @@ function displayInitialize() {
     }
 }
 
+function getAnswer() {
+    switch (oper) {
+        case '+':
+            add(num2, num1);
+            num1 = result;
+            num2 = num1;
+            break;
+        case '-':
+            sub(num2, num1);
+            num1 = result;
+            num2 = num1;
+            break;
+        case 'x':
+            multiply(num2, num1);
+            num1 = result;
+            num2 = num1;
+            break;
+        case '/':
+            divide(num2, num1);
+            num1 = result;
+            num2 = num1;
+            break;
+        default:
+            break;
+    }
+}
