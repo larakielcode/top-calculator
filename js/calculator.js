@@ -31,6 +31,27 @@ const clearScreen = document.querySelector("#clear");
 const digits = document.querySelectorAll(".digits");
 const operator = document.querySelectorAll(".operand");
 const compute = document.querySelector("#equals");
+const negate = document.querySelector(".negate");
+
+negate.addEventListener("click", () => {
+    if (num1 == '0') {
+        result = num1;
+    } else {
+        num1 = (num1 * (-1));
+        result = num1;
+    }
+
+    displayInitialize();
+    console.clear();
+    console.log('%cvalues after clicking negate button', 'color:red');
+    console.log('var num1 ===> ', num1);
+    console.log('var num2 ===> ', num2);
+    console.log('var result ===> ', result);
+    console.log('var expression ===> ', expression);
+    console.log('var oper ===> ', oper);
+    console.log('summary display value ===> ', summaryDisplay.value); // string 0
+    console.log('main display value ===> ', mainDisplay.value); // string 0
+});
 
 /* initialize variables and display on load */
 window.addEventListener("load", (event) => {
@@ -51,8 +72,6 @@ window.addEventListener("load", (event) => {
     expression = "";
     oper = "";
     displayInitialize();
-    /* summaryDisplay.value = "";
-    mainDisplay.value = 0; */
     console.clear();
     console.log('%cvalues after display initialize', 'color:red');
     console.log('var num1 ===> ', num1);
@@ -64,8 +83,6 @@ window.addEventListener("load", (event) => {
     console.log('main display value ===> ', mainDisplay.value); // string 0
 });
 
-const negate = document.querySelector(".negate");
-
 /* when pressing a digit */
 digits.forEach(btn => btn.addEventListener("click", checkDigit));
 
@@ -75,7 +92,6 @@ function checkDigit() {
     let num = this.textContent;
     showDigit(num);
     displayInitialize();
-    //num1 = parseInt(num1); parse num1 to be a number after displaying in screen
     console.clear();
     console.log('%cvalues after display pressing a digit', 'color:red');
     console.log('var num1 ===> ', num1);
@@ -94,8 +110,7 @@ function showDigit(num) {
     if ((!isNotAllZero(num1)) && num == '0') {
         num1 = '0'; // if num1 is all 0 reset the value of num1 to empty
     }
-    /* checks for the value of num1 if its empty display it 0 or display the value of num1 */
-    //return (num1 == "") ? mainDisplay.value = 0 : mainDisplay.value = num1;
+
     num1 = removeTrailingZero(num1);
     return (num1 == "") ? num1 = "0" : result = num1;
 }
@@ -104,6 +119,7 @@ let isNotAllZero = (num) => {
     return num * 1 != 0;
 };
 
+/* function to remove trailing 0 */
 function removeTrailingZero(arg) {
     return arg.replace(/^0+/, '');
 }
@@ -118,11 +134,7 @@ function clearSc() {
     expression = "";
     result = "0";
 
-    //clear the screens
-    /* mainDisplay.value = 0;
-    summaryDisplay.value = ""; */
     displayInitialize();
-
     console.clear();
     console.log('%cvalues after clear screen', 'color:red');
     console.log('var num1 ===> ', num1);
