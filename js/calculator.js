@@ -13,17 +13,26 @@ let result; // string to store the math expression
 let negateCounter = 1;
 let expression;
 
-const add = (a, b) => result = parseInt(a) + parseInt(b);
-const sub = (a, b) => result = a - b;
-const multiply = (a, b) => result = a * b;
+const add = (a, b) => result = formatNum(Number(a) + Number(b));
+const sub = (a, b) => result = formatNum((a / b));
+const multiply = (a, b) => result = formatNum((a / b));
 const divide = (a, b) => {
     if (a == '0' || b == '0') {
         clearSc();
-        return result = "LMAO";
+        return result = "LOSLOS NIMO";
     } else {
-        return result = a / b;
+        result = formatNum((a / b));
     }
 };
+
+/* function format number to whole number or round off decimal */
+function formatNum(arg) {
+    if (arg % 1 !== 0) {
+        return arg.toFixed(3);
+    } else {
+        return arg;
+    }
+}
 
 const mainDisplay = document.querySelector("#screen");
 const summaryDisplay = document.querySelector("#displaySum");
@@ -33,6 +42,7 @@ const operator = document.querySelectorAll(".operand");
 const compute = document.querySelector("#equals");
 const negate = document.querySelector(".negate");
 
+/* function negate */
 negate.addEventListener("click", () => {
     if (num1 == '0') {
         result = num1;
@@ -162,7 +172,7 @@ function storeOperand() {
         num1 = "";
     }
 
-    if (result == "LMAO") {
+    if (result == "LOSLOS NIMO") {
         clearSc();
     }
 
@@ -182,7 +192,7 @@ function storeOperand() {
 compute.addEventListener("click", getComputation);
 function getComputation() {
     result = `${num2} ${oper} ${num1}`;
-    if (num1 != "" && num2 != "" && oper != "") {
+    if ((num1 != "" || num2 != "") && oper != "") {
         expression = result;
         getAnswer();
     } else {
@@ -194,6 +204,9 @@ function getComputation() {
     console.log('var num1 ===> ', num1);
     console.log('var num2 ===> ', num2);
     console.log('var result ===> ', result);
+    let sample = 333.22 % 1;
+    console.log('sample ===> ', sample);
+    console.log('type of result===> ', typeof result);
     console.log('var expression ===> ', expression);
     console.log('var oper ===> ', oper);
     console.log('summary display value ===> ', summaryDisplay.value);
